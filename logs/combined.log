@@ -1,0 +1,45 @@
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:19:56 +0000] \"GET /hee HTTP/1.1\" 404 142\n","level":"info"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:20:11 +0000] \"GET /hee HTTP/1.1\" 404 142\n","level":"info"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:28:58 +0000] \"GET /hee HTTP/1.1\" 404 142\n","level":"info"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:31:39 +0000] \"GET /hee HTTP/1.1\" 404 142\n","level":"info"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:35:59 +0000] \"GET /hee HTTP/1.1\" 404 142\n","level":"info"}
+{"message":"info","level":"info"}
+{"message":"error","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:37:30 +0000] \"GET / HTTP/1.1\" 500 1360\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [18/Aug/2019:23:39:21 +0000] \"GET / HTTP/1.1\" 500 1336\n","level":"info"}
+{"error":{},"level":"error","message":"uncaughtException: Cannot read property 'message' of undefined\nTypeError: Cannot read property 'message' of undefined\n    at module.exports.catchAll (/home/brotaku/workspace/graphvis-server/middleware/ErrorHandlers.js:14:25)\n    at Object.<anonymous> (/home/brotaku/workspace/graphvis-server/index.js:25:9)\n    at Module._compile (internal/modules/cjs/loader.js:776:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)\n    at Module.load (internal/modules/cjs/loader.js:643:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:556:12)\n    at Function.Module.runMain (internal/modules/cjs/loader.js:839:10)\n    at internal/main/run_main_module.js:17:11","stack":"TypeError: Cannot read property 'message' of undefined\n    at module.exports.catchAll (/home/brotaku/workspace/graphvis-server/middleware/ErrorHandlers.js:14:25)\n    at Object.<anonymous> (/home/brotaku/workspace/graphvis-server/index.js:25:9)\n    at Module._compile (internal/modules/cjs/loader.js:776:30)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)\n    at Module.load (internal/modules/cjs/loader.js:643:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:556:12)\n    at Function.Module.runMain (internal/modules/cjs/loader.js:839:10)\n    at internal/main/run_main_module.js:17:11","exception":true,"date":"Sun Aug 18 2019 17:00:15 GMT-0700 (Pacific Daylight Time)","process":{"pid":28174,"uid":1000,"gid":1000,"cwd":"/home/brotaku/workspace/graphvis-server","execPath":"/home/brotaku/.nvm/versions/node/v12.6.0/bin/node","version":"v12.6.0","argv":["/home/brotaku/.nvm/versions/node/v12.6.0/bin/node","/home/brotaku/workspace/graphvis-server/index.js"],"memoryUsage":{"rss":43937792,"heapTotal":16404480,"heapUsed":9006808,"external":1256053}},"os":{"loadavg":[0.560546875,0.509765625,0.52685546875],"uptime":24898},"trace":[{"column":25,"file":"/home/brotaku/workspace/graphvis-server/middleware/ErrorHandlers.js","function":"module.exports.catchAll","line":14,"method":"catchAll","native":false},{"column":9,"file":"/home/brotaku/workspace/graphvis-server/index.js","function":null,"line":25,"method":null,"native":false},{"column":30,"file":"internal/modules/cjs/loader.js","function":"Module._compile","line":776,"method":"_compile","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module._extensions..js","line":787,"method":".js","native":false},{"column":32,"file":"internal/modules/cjs/loader.js","function":"Module.load","line":643,"method":"load","native":false},{"column":12,"file":"internal/modules/cjs/loader.js","function":"Module._load","line":556,"method":"_load","native":false},{"column":10,"file":"internal/modules/cjs/loader.js","function":"Module.runMain","line":839,"method":"runMain","native":false},{"column":11,"file":"internal/main/run_main_module.js","function":null,"line":17,"method":null,"native":false}]}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:01:37 +0000] \"GET /hee HTTP/1.1\" - -\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:01:40 +0000] \"GET /hee HTTP/1.1\" - -\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:01:46 +0000] \"GET / HTTP/1.1\" - -\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:02:40 +0000] \"GET /s HTTP/1.1\" - -\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:04:35 +0000] \"GET /s HTTP/1.1\" - -\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:04:37 +0000] \"GET / HTTP/1.1\" - -\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:04:52 +0000] \"GET / HTTP/1.1\" 500 1336\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:04:54 +0000] \"GET /s HTTP/1.1\" 404 140\n","level":"info"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:05:56 +0000] \"GET /s HTTP/1.1\" 404 140\n","level":"info"}
+{"message":"made it ","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:06:05 +0000] \"GET /s HTTP/1.1\" 400 1329\n","level":"info"}
+{"message":"made it ","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:09:36 +0000] \"GET /s HTTP/1.1\" - -\n","level":"info"}
+{"message":"made it ","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:11:36 +0000] \"GET /s HTTP/1.1\" - -\n","level":"info"}
+{"message":"made it ","level":"error"}
+{"message":"::ffff:127.0.0.1 - - [19/Aug/2019:00:11:39 +0000] \"GET /s HTTP/1.1\" - -\n","level":"info"}

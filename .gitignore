@@ -13,3 +13,4 @@
 
 # don't include vscode launch files
 .vscode/
+node_modules/
