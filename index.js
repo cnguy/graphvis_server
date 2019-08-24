@@ -3,15 +3,17 @@ var morgan = require('morgan');
 var cors = require('cors');
 var winston = require('./config/winston')
 var formiddable = require('express-formidable')
+var bodyParser = require('body-parser')
+var fs = require('fs')
+var mongoose = require('mongoose')
+
+const new_graph = require('./routes/new');
+const mongo_config = require('./config/mongo')
 
 var app = express()
 
 //middleware management
 const dev_status = process.env.NODE_ENV
-
-var logger_settings = 'common'
-//logging middleware
-app.use(morgan(logger_settings, { stream: winston.stream }))
 
 //cors middleware
 var allowed_origins = '*'
@@ -25,23 +27,60 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
-// Formiddable
+//Use winston for main output, but utilize the Morgan middleware. Sends to winston as a stream
+var logger_settings = 'common'
+app.use(morgan(logger_settings, { stream: winston.stream }))
+
+
+// app.options('*', cors());
+
+// Formiddle is used to parse the form data we send back (files)
 const formiddableOptions = {
     type: 'multipart',
     multiples: true
 }
-app.use(formiddable())
+app.use(formiddable(formiddableOptions))
+
+
+//Body Parser is used to parse the body of the requests we make
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+
+
+
+
+
+//connect to database
+mongoose.connect(mongo_config.URI,{useNewUrlParser: true})
+    .catch(error => {
+        winston.error("Could not connect to database")
+    })
+
+var test = mongoose.connection;
+test.on('error', console.error.bind(console, 'connection error:'))
+test.once('open', () => {
+    winston.info('Successfully connected to database')
+})
+
+
+
 
 
 // Routes
-app.post('/graph/new', (req, res) => {
-
+app.post('/api/graph/new', (req, res) => {
+    const response = new_graph(req.fields, req.files);
+    res.end(response.hash);
 })
 
 // retrieves the graph set given a hash-key
-app.get('/graph/:key', (req, res) =>{
+app.get('/api/graph/id/:key', (req, res) =>{
 
 })
+
+
+
+
 
 app.listen(5415, function () {
     console.log('Listening on port 5415!')
