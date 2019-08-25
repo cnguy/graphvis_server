@@ -1,6 +1,5 @@
 const mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    Schema = mongoose.Schema
 
 // An edge is contained in an edge list, so "to" represents the destination of the edge, 
 // where the origin is the node object this edge is contained in
@@ -34,7 +33,6 @@ var GraphSchema = new Schema({
 })
 
 var GraphPairSchema = new Schema({
-    hash: String,                               //the hash to access this graph again
     name: String,                               //name of the graph
     author: {type: String, default: ''},        //graph creator
     created: {type: Date, default: Date.now},   // date graph was created

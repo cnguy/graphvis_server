@@ -4,10 +4,9 @@ var cors = require('cors');
 var winston = require('./config/winston')
 var formiddable = require('express-formidable')
 var bodyParser = require('body-parser')
-var fs = require('fs')
 var mongoose = require('mongoose')
 
-const new_graph = require('./routes/new');
+const newGraph = require('./routes/new');
 const mongo_config = require('./config/mongo')
 
 var app = express()
@@ -69,8 +68,12 @@ test.once('open', () => {
 
 // Routes
 app.post('/api/graph/new', (req, res) => {
-    const response = new_graph(req.fields, req.files);
-    res.end(response.hash);
+    newGraph(req.fields, req.files).then((hash) =>{
+        res.end(response.hash);
+    }).catch(() =>{
+        //send error
+    })
+    
 })
 
 // retrieves the graph set given a hash-key
