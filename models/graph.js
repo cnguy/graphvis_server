@@ -23,12 +23,14 @@ var NodeSchema = new Schema({
 // Note: The top 5 fields are filenames, not actual data. 
 // Keep record of the filename in case the user wants to reference which files were used for this graph pair
 var GraphSchema = new Schema({
-    edge_list: String, 
-    weight_matrix: String, 
-    coordinates: String, 
-    node_names: String,
-    node_ids: String, 
-    orbits: String, 
+    filenames:{
+        edge_list: String, 
+        weight_matrix: String, 
+        coordinates: String, 
+        node_names: String,
+        node_ids: String, 
+        orbits: String,
+    },
     nodes: [NodeSchema]
 })
 
