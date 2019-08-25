@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
 // An edge is contained in an edge list, so "to" represents the destination of the edge, 
 // where the origin is the node object this edge is contained in
 var EdgeSchema = new Schema({
-    to: Number,             //destination
+    to: Number,             // destination -> corresponds to NodeSchema.id (also the same as the index in GraphSchema.nodes)
     weight: Number          // float: weight of edge
 })
 
@@ -14,10 +14,11 @@ var OrbitSchema = new Schema({
 })
 
 var NodeSchema = new Schema({
-    id: Number,             //id of the node
-    name: String,           //name of the node
-    edges: [EdgeSchema],    //edge list
-    orbits: [OrbitSchema]   //orbit list
+    id: Number,             //id of the node. Corresponds to the node index in the files.
+    abbrev_name: String,    //abbreviated names taken from the node_ids file.
+    full_name: String,      // full name of the node
+    edges: [EdgeSchema],    // edge list
+    orbits: [OrbitSchema]   // orbit list
 })
 
 // Note: The top 5 fields are filenames, not actual data. 

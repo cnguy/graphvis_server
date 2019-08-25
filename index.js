@@ -6,7 +6,8 @@ var formiddable = require('express-formidable')
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose')
 
-const newGraph = require('./routes/new');
+const newGraph = require('./routes/newGraph');
+const getGraph = require('./routes/getGraph');
 const mongo_config = require('./config/mongo')
 
 var app = express()
@@ -79,11 +80,7 @@ app.post('/api/graph/new', (req, res) => {
 })
 
 // retrieves the graph set given a hash-key
-app.get('/api/graph/id/:key', (req, res) =>{
-
-})
-
-
+app.get('/api/graph/id/:graph_id', (req, res) => getGraph(req, res));
 
 
 

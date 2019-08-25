@@ -108,6 +108,7 @@ function validateGraphData(graphData){
     let numNodes = graphData.node_names.length;
     let errors = []
 
+    //disabling for now until we get a better data file from hayes
     //weight matrix check
     // if(graphData.weight_matrix.length != numNodes || Object.keys(graphData.weight_matrix[0]).length != numNodes){
     //     let height = weight_matrix.length;
@@ -181,7 +182,7 @@ function makeGraph(graphData, filenames){
 
     let errors = validateGraphData(graphData);
     if(errors){
-        winston.error("Errors detected in graph data. Throwing error")
+        winston.error("Errors detected in graph data. Throwing error");
         throw new Error(errors.join('\n'));
     }
 
@@ -190,8 +191,9 @@ function makeGraph(graphData, filenames){
     let nodeList = [];
     for(let i = 0; i < numNodes; ++i){
         let new_node = {
-            id: graphData.node_ids[i].id,
-            name: graphData.node_names[i].name,
+            id: i, 
+            abbrev_name: graphData.node_ids[i].id,
+            full_name: graphData.node_names[i].name,
             edges: getEdgeList(graphData.edge_list, graphData.weight_matrix, i),
             orbits: getOrbitList(graphData.orbits[i])
         }
@@ -254,7 +256,6 @@ module.exports = function newGraph(metadata, files){
     return parseData(files)
     .then((data) => makeGraphPair(data, files, metadata))
     .then((graph_doc) =>{
-        console.log(graph_doc);
         return graph_doc.id;
     })
 }
