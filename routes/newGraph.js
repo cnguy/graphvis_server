@@ -4,47 +4,45 @@ var winston = require('../config/winston')
 
 const GraphPair = require('../models/graph');
 
+const graphFiles = () => {
+    return {
+        edge_list: null, 
+        coordinates: null, 
+        node_names: null,
+        node_ids: null,
+        orbits: null
+    }
+}
+
 const graphData = () => {
     return {
-        ocd: {
-            edge_list: null, 
-            weight_matrix: null,
-            coordinates: null, 
-            node_names: null,
-            node_ids: null,
-            orbits: null
-        },
-        con: {
-            edge_list: null, 
-            weight_matrix: null,
-            coordinates: null, 
-            node_names: null,
-            node_ids: null,
-            orbits: null
-        }
+        ocd: graphFiles(),
+        con: graphFiles()
     }
 } 
 
+const allowedFiles = () => {
+    let graph_data = graphData();
+    return Object.keys(graph_data).map(gtype =>{
+        return Object.keys(graph_data[gtype]).map(filetype =>{
+            return `${gtype}_${filetype}`;
+        })
+    }).flat();
+}
+
 const csvParseOptions = {
     edge_list: {
-        headers: ['from', 'to'],
+        // NOTE: if the edge list has 2 columns, then the weight column will be "undefined"
+        headers: ['from', 'to', 'weight'],
         separator: ' ',
-        mapValues: ({header, index, value}) =>{
+        mapValues: ({value}) =>{
             return Number(value);
-        }
-    },
-    weight_matrix: {
-        headers: false, //use row indices,
-        separator: ' ',
-        mapValues: ({header, index, value}) =>{
-            // return Number(value);
-            return value
         }
     },
     coordinates:{
         headers: ['x', 'y', 'z'],
         separator: ' ',
-        mapValues: ({header, index, value}) =>{
+        mapValues: ({value}) =>{
             return Number(value);
         }
     }, 
@@ -59,7 +57,7 @@ const csvParseOptions = {
     orbits:{
         headers: false,
         separator: ' ',
-        mapValues: ({header, index, value}) =>{
+        mapValues: ({value}) =>{
             return Number(value);
         }
     }
@@ -93,10 +91,15 @@ async function parseData(files){
         let filetype = filename.substr(filename.indexOf('_') + 1);
         if(filename.startsWith('ocd')){
             //ocd graph data
-            data.ocd[filetype] = await readData(file.path, csvParseOptions[filetype]);
+            if(filetype in data.ocd){
+                data.ocd[filetype] = await readData(file.path, csvParseOptions[filetype]);
+            }
+            
         } else {
             //con graph data
-            data.con[filetype] = await readData(file.path, csvParseOptions[filetype]);
+            if(filetype in data.con){
+                data.con[filetype] = await readData(file.path, csvParseOptions[filetype]);
+            }
         }
     }
     return data
@@ -107,14 +110,6 @@ function validateGraphData(graphData){
 
     let numNodes = graphData.node_names.length;
     let errors = []
-
-    //disabling for now until we get a better data file from hayes
-    //weight matrix check
-    // if(graphData.weight_matrix.length != numNodes || Object.keys(graphData.weight_matrix[0]).length != numNodes){
-    //     let height = weight_matrix.length;
-    //     let width = Object.keys(weight_matrix[0]).length;
-    //     errors.push(`Weight Matrix size does not match node name list. Expected: ${numNodes}x${numNodes}. Recieved: ${height}x${width}`)
-    // }
 
     //coordinate check
     if(graphData.coordinates.length != numNodes){
@@ -150,15 +145,14 @@ function validateGraphData(graphData){
     return errors.length > 0 ? errors : null;
 }
 
-function getEdgeList(edgeList, weight_matrix, node_id){
+function getEdgeList(edgeList, node_id){
     let data = [];
-    edgeList.forEach(edge =>{
+    edgeList.forEach(edge => {
         if(edge.from === node_id){
             // let edgeWeight = weight_matrix[node_id][edge.to];     FOR NOW, this format isn't working
-            let edgeWeight = Math.random()
             data.push({
                 to: edge.to,
-                weight: edgeWeight
+                weight: edge.weight
             })
         }
     })
@@ -204,7 +198,6 @@ function makeGraph(graphData, filenames){
     return {
         filenames:{
             edge_list: filenames.edge_list,
-            weight_matrix: filenames.weight_matrix,
             coordinates: filenames.coordinates,
             node_names: filenames.node_names,
             node_ids: filenames.node_ids,
@@ -218,7 +211,6 @@ function makeGraphPair(graphData, files, metadata){
     winston.info("Creating OCD Graph Data")
     let ocd_graph = makeGraph(graphData.ocd, {
         edge_list:      files['ocd_edge_list'].name,
-        weight_matrix:  files['ocd_weight_matrix'].name,
         coordinates:    files['ocd_coordinates'].name,
         node_names:     files['ocd_node_names'].name,
         node_ids:       files['ocd_node_ids'].name,
@@ -228,7 +220,6 @@ function makeGraphPair(graphData, files, metadata){
     winston.info("Creating CON Graph Data")
     let con_graph = makeGraph(graphData.con, {
         edge_list:      files['con_edge_list'].name,
-        weight_matrix:  files['con_weight_matrix'].name,
         coordinates:    files['con_coordinates'].name,
         node_names:     files['con_node_names'].name,
         node_ids:       files['con_node_ids'].name,
@@ -249,13 +240,38 @@ function makeGraphPair(graphData, files, metadata){
     return newGraphPair.save();
 }
 
-module.exports = function newGraph(metadata, files){
-    winston.info("Received New Graph data")
-    //takes in new metadata and files
-    //read in data from files into objects
-    return parseData(files)
-    .then((data) => makeGraphPair(data, files, metadata))
-    .then((graph_doc) =>{
-        return graph_doc.id;
+function verifyFiles(files){
+    return new Promise((resolve, reject) =>{
+        let allowed_files = allowedFiles();
+        let sentFiles = Object.keys(files);
+        for(let i = 0; i < sentFiles.length; ++i){
+            if(!allowed_files.includes(sentFiles[i])){
+                reject(new Error(`Unexpected files in request. Accepted files are ${allowed_files}`))
+            }
+        }
+        resolve()
     })
+    
+}
+
+
+module.exports = function newGraph(req, res){
+    let files = req.files;
+    let metadata = req.fields;
+
+    verifyFiles(files)
+        .then(() => parseData(files))
+        .then((data) => makeGraphPair(data, files, metadata))
+        .then((graph_doc) => {
+            res.status(200).json({
+                hash: graph_doc.id
+            });
+        })
+        .catch(err =>{
+            winston.error(err.message);
+            res.status(402).json({
+                errors: err.message
+            })
+        })
+
 }

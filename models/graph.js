@@ -26,7 +26,6 @@ var NodeSchema = new Schema({
 var GraphSchema = new Schema({
     filenames:{
         edge_list: String, 
-        weight_matrix: String, 
         coordinates: String, 
         node_names: String,
         node_ids: String, 

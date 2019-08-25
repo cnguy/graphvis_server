@@ -66,20 +66,8 @@ test.once('open', () => {
 
 
 
-
 // Routes
-app.post('/api/graph/new', (req, res) => {
-    newGraph(req.fields, req.files).then((graph_id) =>{
-        winston.info(`New graph created successfully in database. Graph ID: ${graph_id}`);
-        res.end(graph_id);
-    }).catch(() =>{
-        winston.error("Error in graph creation. Returning error to client");
-        //send error
-    })
-    
-})
-
-// retrieves the graph set given a hash-key
+app.post('/api/graph/new', (req, res) => newGraph(req, res));
 app.get('/api/graph/id/:graph_id', (req, res) => getGraph(req, res));
 
 

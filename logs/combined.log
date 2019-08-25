@@ -285,3 +285,104 @@
 {"message":"New graph created successfully in database. Graph ID: 5d622d270c06d96293d1d001","level":"info"}
 {"message":"::1 - - [25/Aug/2019:06:39:40 +0000] \"POST /api/graph/new HTTP/1.1\" 200 -\n","level":"info"}
 {"message":"::1 - - [25/Aug/2019:06:39:51 +0000] \"GET /api/graph/id/5d622d270c06d96293d1d001 HTTP/1.1\" 200 2061060\n","level":"info"}
+{"message":"Could not connect to database","level":"error"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Could not connect to database","level":"error"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating CON Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating new GraphPair Object","level":"info"}
+{"message":"Saving Graph Pair to Database","level":"info"}
+{"message":"New graph created successfully in database. Graph ID: 5d62de3377948c2da0d7f266","level":"info"}
+{"message":"::1 - - [25/Aug/2019:19:15:03 +0000] \"POST /api/graph/new HTTP/1.1\" 200 -\n","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Error in graph creation. Returning error to client","level":"error"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Error in graph creation. Returning error to client","level":"error"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Error in graph creation. Returning error to client","level":"error"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Error in graph creation. Returning error to client","level":"error"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating CON Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating new GraphPair Object","level":"info"}
+{"message":"Saving Graph Pair to Database","level":"info"}
+{"message":"New graph created successfully in database. Graph ID: 5d62dfdf6bc6ff30e919a56e","level":"info"}
+{"message":"::1 - - [25/Aug/2019:19:22:10 +0000] \"POST /api/graph/new HTTP/1.1\" 200 -\n","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Received New Graph data","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Unexpected files in request. Accepted files are ocd_edge_list,ocd_coordinates,ocd_node_names,ocd_node_ids,ocd_orbits,con_edge_list,con_coordinates,con_node_names,con_node_ids,con_orbits","level":"error"}
+{"message":"::1 - - [25/Aug/2019:19:41:06 +0000] \"POST /api/graph/new HTTP/1.1\" 402 198\n","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating CON Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"Graph edge list invalid","level":"error"}
+{"message":"Errors detected in graph data. Throwing error","level":"error"}
+{"message":"Invalid node ids found in edge list","level":"error"}
+{"message":"::1 - - [25/Aug/2019:19:41:20 +0000] \"POST /api/graph/new HTTP/1.1\" 402 48\n","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating CON Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"Graph edge list invalid","level":"error"}
+{"message":"Errors detected in graph data. Throwing error","level":"error"}
+{"message":"Invalid node ids found in edge list","level":"error"}
+{"message":"::1 - - [25/Aug/2019:19:41:37 +0000] \"POST /api/graph/new HTTP/1.1\" 402 48\n","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"Graph Coordinates invalid","level":"error"}
+{"message":"Errors detected in graph data. Throwing error","level":"error"}
+{"message":"Coordinates list is not correct length. Expected 100. Recieved 101","level":"error"}
+{"message":"::1 - - [25/Aug/2019:19:41:59 +0000] \"POST /api/graph/new HTTP/1.1\" 402 79\n","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating CON Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating new GraphPair Object","level":"info"}
+{"message":"Saving Graph Pair to Database","level":"info"}
+{"message":"res.setHead is not a function","level":"error"}
+{"message":"::1 - - [25/Aug/2019:19:48:04 +0000] \"POST /api/graph/new HTTP/1.1\" 402 42\n","level":"info"}
+{"message":"Successfully connected to database","level":"info"}
+{"message":"Creating OCD Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating CON Graph Data","level":"info"}
+{"message":"Validating graph data","level":"info"}
+{"message":"100 new nodes creates successfully","level":"info"}
+{"message":"Creating new GraphPair Object","level":"info"}
+{"message":"Saving Graph Pair to Database","level":"info"}
+{"message":"::1 - - [25/Aug/2019:19:48:50 +0000] \"POST /api/graph/new HTTP/1.1\" 200 35\n","level":"info"}
+{"message":"::1 - - [25/Aug/2019:19:49:00 +0000] \"GET /api/graph/id/5d62e62019c14a3a570c87a4 HTTP/1.1\" 200 904466\n","level":"info"}
+{"message":"::1 - - [25/Aug/2019:19:51:59 +0000] \"GET /api/graph/id/5d62e62019c14a3a570c87a HTTP/1.1\" 402 61\n","level":"info"}
+{"message":"::1 - - [25/Aug/2019:19:52:09 +0000] \"GET /api/graph/id/ HTTP/1.1\" 404 152\n","level":"info"}
