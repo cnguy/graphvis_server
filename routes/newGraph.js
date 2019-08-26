@@ -6,10 +6,10 @@ const GraphPair = require('../models/graph');
 
 const graphFiles = () => {
     return {
-        edge_list: null, 
+        edgeList: null, 
         coordinates: null, 
-        node_names: null,
-        node_ids: null,
+        nodeNames: null,
+        nodeIds: null,
         orbits: null
     }
 }
@@ -31,7 +31,7 @@ const allowedFiles = () => {
 }
 
 const csvParseOptions = {
-    edge_list: {
+    edgeList: {
         // NOTE: if the edge list has 2 columns, then the weight column will be "undefined"
         headers: ['from', 'to', 'weight'],
         separator: ' ',
@@ -46,11 +46,11 @@ const csvParseOptions = {
             return Number(value);
         }
     }, 
-    node_names: {
+    nodeNames: {
         headers: ['name'],
         separator: ' '
     },
-    node_ids: {
+    nodeIds: {
         headers: ['id'],
         separator: ' '
     },
@@ -108,7 +108,7 @@ async function parseData(files){
 function validateGraphData(graphData){
     winston.info("Validating graph data")
 
-    let numNodes = graphData.node_names.length;
+    let numNodes = graphData.nodeNames.length;
     let errors = []
 
     //coordinate check
@@ -119,9 +119,9 @@ function validateGraphData(graphData){
     }
 
     //node_ids check
-    if(graphData.node_ids.length != numNodes){
+    if(graphData.nodeIds.length != numNodes){
         winston.error("Graph node ids invalid")
-        let numIds = graphData.node_ids.length;
+        let numIds = graphData.nodeIds.length;
         errors.push(`Node IDs list is not correct length. Expected ${numNodes}. Recieved ${numIds}.`);
     }
 
@@ -133,8 +133,8 @@ function validateGraphData(graphData){
     }
 
     //edge list
-    for(let i = 0; i < graphData.edge_list.length; ++i){
-        let edge = graphData.edge_list[i];
+    for(let i = 0; i < graphData.edgeList.length; ++i){
+        let edge = graphData.edgeList[i];
         if(edge.to < 0 || edge.to > numNodes || edge.from < 0 || edge.from > numNodes){
             errors.push('Invalid node ids found in edge list');
             winston.error("Graph edge list invalid")
@@ -181,14 +181,14 @@ function makeGraph(graphData, filenames){
     }
 
     //error free - supposedly
-    let numNodes = graphData.node_names.length;
+    let numNodes = graphData.nodeNames.length;
     let nodeList = [];
     for(let i = 0; i < numNodes; ++i){
         let new_node = {
             id: i, 
-            abbrev_name: graphData.node_ids[i].id,
-            full_name: graphData.node_names[i].name,
-            edges: getEdgeList(graphData.edge_list, graphData.weight_matrix, i),
+            abbrevName: graphData.nodeIds[i].id,
+            fullName: graphData.nodeNames[i].name,
+            edges: getEdgeList(graphData.edgeList, i),
             orbits: getOrbitList(graphData.orbits[i])
         }
         nodeList.push(new_node);
@@ -197,10 +197,10 @@ function makeGraph(graphData, filenames){
     winston.info(`${numNodes} new nodes creates successfully`)
     return {
         filenames:{
-            edge_list: filenames.edge_list,
+            edgeList: filenames.edgeList,
             coordinates: filenames.coordinates,
-            node_names: filenames.node_names,
-            node_ids: filenames.node_ids,
+            nodeNames: filenames.nodeNames,
+            nodeIds: filenames.nodeIds,
             orbits: filenames.orbits
         },
         nodes: nodeList
@@ -210,25 +210,25 @@ function makeGraph(graphData, filenames){
 function makeGraphPair(graphData, files, metadata){
     winston.info("Creating OCD Graph Data")
     let ocd_graph = makeGraph(graphData.ocd, {
-        edge_list:      files['ocd_edge_list'].name,
-        coordinates:    files['ocd_coordinates'].name,
-        node_names:     files['ocd_node_names'].name,
-        node_ids:       files['ocd_node_ids'].name,
-        orbits:         files['ocd_orbits'].name
+        edgeList:      files['ocd_edgeList'].name,
+        coordinates:   files['ocd_coordinates'].name,
+        nodeNames:     files['ocd_nodeNames'].name,
+        nodeIds:       files['ocd_nodeIds'].name,
+        orbits:        files['ocd_orbits'].name
     })
 
     winston.info("Creating CON Graph Data")
     let con_graph = makeGraph(graphData.con, {
-        edge_list:      files['con_edge_list'].name,
-        coordinates:    files['con_coordinates'].name,
-        node_names:     files['con_node_names'].name,
-        node_ids:       files['con_node_ids'].name,
-        orbits:         files['con_orbits'].name
+        edgeList:      files['con_edgeList'].name,
+        coordinates:   files['con_coordinates'].name,
+        nodeNames:     files['con_nodeNames'].name,
+        nodeIds:       files['con_nodeIds'].name,
+        orbits:        files['con_orbits'].name
     })
 
     winston.info("Creating new GraphPair Object")
     var newGraphPair = new GraphPair({
-        name: metadata.name, 
+        name: metadata.graphName, 
         author: metadata.author,
         graphs:{
             ocd: ocd_graph,

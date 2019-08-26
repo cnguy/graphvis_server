@@ -15,20 +15,20 @@ var OrbitSchema = new Schema({
 
 var NodeSchema = new Schema({
     id: Number,             //id of the node. Corresponds to the node index in the files.
-    abbrev_name: String,    //abbreviated names taken from the node_ids file.
-    full_name: String,      // full name of the node
-    edges: [EdgeSchema],    // edge list
-    orbits: [OrbitSchema]   // orbit list
+    abbrevName: String,    //abbreviated names taken from the node_ids file.
+    fullName: String,      // full name of the node
+    edges:   [EdgeSchema],    // edge list
+    orbits:  [OrbitSchema]   // orbit list
 })
 
 // Note: The top 5 fields are filenames, not actual data. 
 // Keep record of the filename in case the user wants to reference which files were used for this graph pair
 var GraphSchema = new Schema({
     filenames:{
-        edge_list: String, 
+        edgeList: String, 
         coordinates: String, 
-        node_names: String,
-        node_ids: String, 
+        nodeNames: String,
+        nodeIds: String, 
         orbits: String,
     },
     nodes: [NodeSchema]
