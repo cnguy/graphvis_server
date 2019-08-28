@@ -17,6 +17,11 @@ var NodeSchema = new Schema({
     id: Number,             //id of the node. Corresponds to the node index in the files.
     abbrevName: String,    //abbreviated names taken from the node_ids file.
     fullName: String,      // full name of the node
+    coordinates: {
+        x: Number, 
+        y: Number, 
+        z: Number
+    },
     edges:   [EdgeSchema],    // edge list
     orbits:  [OrbitSchema]   // orbit list
 })

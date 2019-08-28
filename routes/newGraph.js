@@ -188,6 +188,11 @@ function makeGraph(graphData, filenames){
             id: i, 
             abbrevName: graphData.nodeIds[i].id,
             fullName: graphData.nodeNames[i].name,
+            coordinates: {
+                x: graphData.coordinates[i].x,
+                y: graphData.coordinates[i].y,
+                z: graphData.coordinates[i].z
+            },
             edges: getEdgeList(graphData.edgeList, i),
             orbits: getOrbitList(graphData.orbits[i])
         }
