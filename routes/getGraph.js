@@ -18,7 +18,7 @@ module.exports = function getGraph(req, res) {
         .exec((err, graph_data) =>{
             if(err){
                 winston.error(`Could not find graph with ${graph_id}`)
-                res.status(402)
+                res.status(404)
                 .json({
                     error: `Could not find graph with ${graph_id}`
                 })
